@@ -54,8 +54,9 @@ const displayResults = async results => { // Set time out spinner
     <section class="card-deck">
       ${
         results.map(result => `
-        <a href="${result.url}">
+        
          <article class="card">
+         <a href="${result.url}">
           <p class="location ${result.location}">${result.location}</p>
           <picture><img alt="house" src="${
             result.image
@@ -70,7 +71,8 @@ const displayResults = async results => { // Set time out spinner
             formatPrice(result.pricelisted)
         }</p></div>
           </div>
-        </article></a>
+          </a>
+        </article>
       `).join('')
     }  
     </section>
