@@ -2,7 +2,7 @@
 // Author: (github.com/bradsec)
 //==============================
 
-const jsonFilePaths = ['json/woolworths.json', 'json/coles.json',];
+const jsonFilePaths = ['json/imovastgoed.json'];
 
 // Fetch JSON Data function
 const fetchJSONData = (url) => {
@@ -54,28 +54,23 @@ const displayResults = async results => { // Set time out spinner
     <section class="card-deck">
       ${
         results.map(result => `
-        <article class="card">
-          <p class="store ${result.store}">${result.store}</p>
-          <picture><img src="${
-            result.imagenewurl
+        <a href="${result.url}">
+         <article class="card">
+          <p class="location ${result.location}">${result.location}</p>
+          <picture><img alt="house" src="${
+            result.image
         }" class="prod-image" /></picture>
           <div class="card-content">
-            <p class="saving"><span class="save">SAVE </span>$${
-            formatPrice(result.saving)
-        }</p>
-            <p class="pricewas">WAS <span>$${
-            formatPrice(result.pricewas)
-        }</span></p>
-            <p class="prod-name">${
-            result.name
+            <p class="saving"><span class="save">Listed </span>$${
+            formatPrice(result.estimatedprice)
         }</p>
             <div class="center"><p class="pricenow ${
             result.store
         }">$${
-            formatPrice(result.pricenow)
+            formatPrice(result.listedprice)
         }</p></div>
           </div>
-        </article>
+        </article></a>
       `).join('')
     }  
     </section>
@@ -191,7 +186,7 @@ Promise.all(jsonFilePaths.map((filePath) => {
             searchResultCount.innerHTML = `<div class="tag-full is-red">No results found</div>`;
             hasMoreData = false;
         } else if (mergedData.length === 1) {
-            searchResultCount.innerHTML = `<div class="tag-full is-green">1 result</div>`;;
+            searchResultCount.innerHTML = `<div class="tag-full is-green">1 result</div>`;
             hasMoreData = false;
         } else {
             searchResultCount.innerHTML = `<div class="tag-full is-green">${mergedData.length} results</div>`;
