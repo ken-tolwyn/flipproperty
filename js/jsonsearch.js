@@ -62,12 +62,12 @@ const displayResults = async results => { // Set time out spinner
         }" class="prod-image" /></picture>
           <div class="card-content">
             <p class="saving"><span class="save">Listed </span>$${
-            formatPrice(result.estimatedprice)
+            formatPrice(result.priceestimated)
         }</p>
             <div class="center"><p class="pricenow ${
-            result.store
+            result.pricelisted
         }">$${
-            formatPrice(result.listedprice)
+            formatPrice(result.pricelisted)
         }</p></div>
           </div>
         </article></a>
@@ -114,7 +114,7 @@ const sortData = () => {
     mergedData.sort((a, b) => {
         let comparison = 0;
 
-        if (sortOrder === 'name') { // Sort alphabetically if sorting by name
+        if (sortOrder === 'location') { // Sort alphabetically if sorting by name
             comparison = a[sortOrder].localeCompare(b[sortOrder]);
         } else { // Otherwise sort numerically
             comparison = a[sortOrder] - b[sortOrder];
@@ -200,32 +200,6 @@ Promise.all(jsonFilePaths.map((filePath) => {
         clearInterval(scrollCheckInterval);
         startScrollCheckInterval();
     });
-
-    // Counting the items for Woolworths and Coles
-    let woolworthsTotalCount = 0;
-    let colesTotalCount = 0;
-    let woolworthsHalfPriceCount = 0;
-    let colesHalfPriceCount = 0;
-
-    mergedData.forEach(result => {
-        if (result.store === 'Woolworths') {
-            woolworthsTotalCount++;
-            if (result.saving >= result.pricewas * 0.5) {
-                woolworthsHalfPriceCount++;
-            }
-        } else if (result.store === 'Coles') {
-            colesTotalCount++;
-            if (result.saving >= result.pricewas * 0.5) {
-                colesHalfPriceCount++;
-            }
-        }
-    });
-
-    document.getElementById('coles-total-count').innerHTML = `<div class="tag-bind"><div class="tag-lead is-dark">Coles</div><div class="tag-tail is-blue">${colesTotalCount}</div></div>`;
-    document.getElementById('coles-half-price-count').innerHTML = `<div class="tag-bind"><div class="tag-lead is-dark">Half-Price</div><div class="tag-tail is-cyan">${colesHalfPriceCount}</div></div>`;
-    document.getElementById('woolworths-total-count').innerHTML = `<div class="tag-bind"><div class="tag-lead is-dark">Woolworths</div><div class="tag-tail is-blue">${woolworthsTotalCount}</div></div>`;
-    document.getElementById('woolworths-half-price-count').innerHTML = `<div class="tag-bind"><div class="tag-lead is-dark">Half-Price</div><div class="tag-tail is-cyan">${woolworthsHalfPriceCount}</div></div>`;
-
     startScrollCheckInterval();
 }).catch(error => {
     console.error('Error:', error);
