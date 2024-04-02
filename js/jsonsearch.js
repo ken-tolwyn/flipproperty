@@ -63,12 +63,12 @@ const displayResults = async results => { // Set time out spinner
         }" class="prod-image" /></picture>
           <div class="card-content">
             <p class="saving"><span class="save">Listed </span>$${
-            formatPrice(result.priceestimated)
+            formatPrice(result.pricelisted)
         }</p>
             <div class="center"><p class="pricenow ${
-            result.pricelisted
+            result.priceestimated
         }">$${
-            formatPrice(result.pricelisted)
+            formatPrice(result.priceestimated)
         }</p></div>
           </div>
           </a>
