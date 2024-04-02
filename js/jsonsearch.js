@@ -169,10 +169,9 @@ Promise.all(jsonFilePaths.map((filePath) => {
         const searchTerm = searchBox.value.trim().toLowerCase().split(' ');
         // Filter the originalData based on the search keywords
         mergedData = originalData.filter(result => {
-            const lowerCaseName = result.name.toLowerCase();
-            const lowerCaseStore = result.store.toLowerCase();
+            const lowerCaseName = result.location.toLowerCase();
             // Check if all the keywords match the product name or store
-            return searchTerm.every(term => lowerCaseName.includes(term) || lowerCaseStore.includes(term));
+            return searchTerm.every(term => lowerCaseName.includes(term));
         });
 
         sortData();
